@@ -1,14 +1,24 @@
 #FROM ubuntu:bionic-20190612
-FROM poobuntu:latest
+FROM innovanon/poobuntu:latest
+MAINTAINER Innovations Anonymous <InnovAnon-Inc@protonmail.com>
 
-LABEL maintainer="sameer@damagehead.com"
+LABEL version="1.0"
+LABEL maintainer="Innovations Anonymous <InnovAnon-Inc@protonmail.com>"
+LABEL about="dockerized apt-cacher-ng"
+LABEL org.label-schema.build-date=$BUILD_DATE
+LABEL org.label-schema.license="PDL (Public Domain License)"
+LABEL org.label-schema.name="apt-cacher-ng"
+LABEL org.label-schema.url="InnovAnon-Inc.github.io/docker-apt-cacher-ng"
+LABEL org.label-schema.vcs-ref=$VCS_REF
+LABEL org.label-schema.vcs-type="Git"
+LABEL org.label-schema.vcs-url="https://github.com/InnovAnon-Inc/docker-apt-cacher-ng"
 
 ENV APT_CACHER_NG_VERSION=3.1 \
     APT_CACHER_NG_CACHE_DIR=/var/cache/apt-cacher-ng \
     APT_CACHER_NG_LOG_DIR=/var/log/apt-cacher-ng \
     APT_CACHER_NG_USER=apt-cacher-ng
 
-RUN DEBIAN_FRONTEND=noninteractive apt install --no-install-recommends -y \
+RUN DEBIAN_FRONTEND=noninteractive apt install --no-install-recommends -qy \
       apt-cacher-ng=${APT_CACHER_NG_VERSION}* ca-certificates wget \
  && sed 's/# ForeGround: 0/ForeGround: 1/' -i /etc/apt-cacher-ng/acng.conf \
  && sed 's/# PassThroughPattern:.*this would allow.*/PassThroughPattern: .* #/' -i /etc/apt-cacher-ng/acng.conf
