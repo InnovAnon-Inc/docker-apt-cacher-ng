@@ -18,7 +18,7 @@ ENV APT_CACHER_NG_VERSION=3.1 \
     APT_CACHER_NG_LOG_DIR=/var/log/apt-cacher-ng \
     APT_CACHER_NG_USER=apt-cacher-ng
 
-RUN DEBIAN_FRONTEND=noninteractive apt install --no-install-recommends -qy \
+RUN DEBIAN_FRONTEND=noninteractive apt install \
       apt-cacher-ng=${APT_CACHER_NG_VERSION}* ca-certificates wget \
  && sed 's/# ForeGround: 0/ForeGround: 1/' -i /etc/apt-cacher-ng/acng.conf \
  && sed 's/# PassThroughPattern:.*this would allow.*/PassThroughPattern: .* #/' -i /etc/apt-cacher-ng/acng.conf
