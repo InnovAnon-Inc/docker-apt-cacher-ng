@@ -24,7 +24,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt install \
  && sed 's/# PassThroughPattern:.*this would allow.*/PassThroughPattern: .* #/' -i /etc/apt-cacher-ng/acng.conf
 
 RUN ./poobuntu-clean.sh
-RUN rm -v dpkg.list poobuntu-clean.sh
+RUN rm -v dpkg.list
 
 COPY entrypoint.sh /sbin/entrypoint.sh
 
