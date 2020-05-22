@@ -28,7 +28,7 @@ RUN sed 's/# ForeGround: 0/ForeGround: 1/' -i /etc/apt-cacher-ng/acng.conf
 RUN sed 's/# PassThroughPattern:.*this would allow.*/PassThroughPattern: .* #/' -i /etc/apt-cacher-ng/acng.conf
 
 RUN ./poobuntu-clean.sh
-RUN rm -v dpkg.list
+#RUN rm -v dpkg.list
 
 COPY entrypoint.sh /sbin/entrypoint.sh
 
