@@ -18,10 +18,14 @@ ENV APT_CACHER_NG_VERSION=3.1 \
     APT_CACHER_NG_LOG_DIR=/var/log/apt-cacher-ng \
     APT_CACHER_NG_USER=apt-cacher-ng
 
-RUN DEBIAN_FRONTEND=noninteractive apt install \
-      apt-cacher-ng=${APT_CACHER_NG_VERSION}* ca-certificates wget \
- && sed 's/# ForeGround: 0/ForeGround: 1/' -i /etc/apt-cacher-ng/acng.conf \
- && sed 's/# PassThroughPattern:.*this would allow.*/PassThroughPattern: .* #/' -i /etc/apt-cacher-ng/acng.conf
+#RUN DEBIAN_FRONTEND=noninteractive apt install \
+#      apt-cacher-ng=${APT_CACHER_NG_VERSION}* ca-certificates wget \
+# && sed 's/# ForeGround: 0/ForeGround: 1/' -i /etc/apt-cacher-ng/acng.conf \
+# && sed 's/# PassThroughPattern:.*this would allow.*/PassThroughPattern: .* #/' -i /etc/apt-cacher-ng/acng.conf
+
+RUN DEBIAN_FRONTEND=noninteractive apt-fast install apt-cacher-ng ca-certificates wget
+RUN sed 's/# ForeGround: 0/ForeGround: 1/' -i /etc/apt-cacher-ng/acng.conf
+RUN sed 's/# PassThroughPattern:.*this would allow.*/PassThroughPattern: .* #/' -i /etc/apt-cacher-ng/acng.conf
 
 RUN ./poobuntu-clean.sh
 RUN rm -v dpkg.list
