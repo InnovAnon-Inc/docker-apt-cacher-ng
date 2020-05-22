@@ -2,4 +2,6 @@
 set -exu
 [ $# -eq 0 ]
 docker-compose build
+docker push innovanon/docker-apt-cacher-ng:latest || :
 docker-compose up --force-recreate -d
+
