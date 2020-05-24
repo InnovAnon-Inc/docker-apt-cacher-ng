@@ -24,8 +24,8 @@ ENV APT_CACHER_NG_VERSION=3.1                        \
 
 COPY entrypoint.sh /sbin/entrypoint.sh
 
-RUN DEBIAN_FRONTEND=noninteractive apt-fast install apt-cacher-ng ca-certificates wget \
- && sed 's/# ForeGround: 0/ForeGround: 1/' -i /etc/apt-cacher-ng/acng.conf             \
+RUN DEBIAN_FRONTEND=noninteractive apt-fast install apt-cacher-ng ca-certificates \
+ && sed 's/# ForeGround: 0/ForeGround: 1/' -i /etc/apt-cacher-ng/acng.conf        \
  && sed 's/# PassThroughPattern:.*this would allow.*/PassThroughPattern: .* #/' -i /etc/apt-cacher-ng/acng.conf \
  \
  && ./poobuntu-clean.sh \
@@ -40,7 +40,8 @@ RUN DEBIAN_FRONTEND=noninteractive apt-fast install apt-cacher-ng ca-certificate
 EXPOSE 3142/tcp
 
 HEALTHCHECK --interval=10s --timeout=2s --retries=3 \
-    CMD wget -q -t1 -o /dev/null  http://localhost:3142/acng-report.html || exit 1
+    CMD pcurl http://localhost:3142/acng-report.html > /dev/null || exit 1
+#    CMD wget -q -t1 -o /dev/null  http://localhost:3142/acng-report.html || exit 1
 
 ENTRYPOINT ["/sbin/entrypoint.sh"]
 
