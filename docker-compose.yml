@@ -2,9 +2,12 @@ version: '3.3'
 
 services:
   apt-cacher-ng:
+    build:
+      context: .
+    hostname: apt-cacher-ng
     restart: always
     image: innovanon/docker-apt-cacher-ng:latest
-    container_name: innovanon/docker-apt-cacher-ng
+    container_name: docker-apt-cacher-ng
     #init: true
     ports:
     - "3142:3142"
