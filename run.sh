@@ -1,6 +1,6 @@
-#! /bin/bash
+#! /usr/bin/env bash
 set -exu
-[[ $# -eq 0 ]]
+(( $# == 0 ))
 cd "`dirname "$(readlink -f "$0")"`"
 
 command -v docker ||
@@ -20,8 +20,8 @@ git add .
 git commit -m "auto commit by $0"
 git push ) || :
 
-while : ; do
-  sudo netstat -tupln | grep 3142
-  sleep 3
-done
+#while : ; do
+#  sudo netstat -tupln | grep 3142
+#  sleep 3
+#done
 
