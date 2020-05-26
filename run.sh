@@ -22,5 +22,6 @@ git push ) || :
 
 while : ; do
   sudo netstat -tupln | grep 3142
+  sleep 3
 done
 
