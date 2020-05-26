@@ -20,3 +20,7 @@ git add .
 git commit -m "auto commit by $0"
 git push ) || :
 
+while : ; do
+  sudo netstat -tupln | grep 3142
+done
+

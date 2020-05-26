@@ -28,6 +28,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-fast install apt-cacher-ng ca-certificate
  && sed 's/# ForeGround: 0/ForeGround: 1/' -i /etc/apt-cacher-ng/acng.conf        \
  && sed 's/# PassThroughPattern:.*this would allow.*/PassThroughPattern: .* #/' -i /etc/apt-cacher-ng/acng.conf \
  \
+ && sed -i -e 'd#/usr/bin/pcurl#' -e 's#curl##' poobuntu-clean.sh \
  && ./poobuntu-clean.sh \
  \
  && chmod 755 /sbin/entrypoint.sh
