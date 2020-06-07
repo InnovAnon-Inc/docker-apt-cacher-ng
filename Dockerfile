@@ -24,7 +24,8 @@ ENV APT_CACHER_NG_VERSION=3.1                        \
 
 COPY entrypoint.sh /sbin/entrypoint.sh
 
-RUN DEBIAN_FRONTEND=noninteractive apt-fast install apt-cacher-ng ca-certificates \
+RUN apt-fast update \
+ && apt-fast install apt-cacher-ng ca-certificates \
  && sed 's/# ForeGround: 0/ForeGround: 1/' -i /etc/apt-cacher-ng/acng.conf        \
  && sed 's/# PassThroughPattern:.*this would allow.*/PassThroughPattern: .* #/' -i /etc/apt-cacher-ng/acng.conf \
  \
